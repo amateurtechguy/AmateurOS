@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #070202;
+    color: #ff2020;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.boot-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 0, 0, 0.10),
+            transparent 45%
+        ),
+        #070202;
+    overflow: hidden;
+}
+
+.boot-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(
+            rgba(255, 0, 0, 0.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.045) 1px,
+            transparent 1px
+        );
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.top-bar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 35px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: rgba(255, 60, 60, 0.7);
+}
+
+.center {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.system-label {
+    margin-bottom: 20px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #ff2020;
+    animation: blink 1.5s infinite;
+}
+
+h1 {
+    font-size: clamp(70px, 12vw, 170px);
+    font-weight: normal;
+    letter-spacing: 20px;
+    margin-left: 20px;
+    color: #ff2020;
+    text-shadow:
+        0 0 10px rgba(255, 0, 0, 0.9),
+        0 0 30px rgba(255, 0, 0, 0.5),
+        0 0 70px rgba(255, 0, 0, 0.25);
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: rgba(255, 70, 70, 0.6);
+}
+
+.divider {
+    width: min(500px, 70%);
+    height: 1px;
+    margin: 35px 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ff2020,
+        transparent
+    );
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+.boot-text {
+    width: 320px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 2;
+    color: rgba(255, 70, 70, 0.6);
+}
+
+.boot-text span {
+    float: right;
+    color: #ff2020;
+    text-shadow: 0 0 8px #ff2020;
+}
+
+.start-button {
+    margin-top: 35px;
+    padding: 14px 45px;
+    background: transparent;
+    border: 1px solid #ff2020;
+    color: #ff2020;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        color 0.2s,
+        box-shadow 0.2s,
+        transform 0.2s;
+}
+
+.start-button:hover {
+    background: #ff2020;
+    color: #070202;
+    box-shadow:
+        0 0 15px rgba(255, 0, 0, 0.8),
+        0 0 40px rgba(255, 0, 0, 0.4);
+    transform: scale(1.03);
+}
+
+.start-button:active {
+    transform: scale(0.98);
+}
+
+.bottom-bar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 0, 0, 0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255, 70, 70, 0.55);
+}
+
+.scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(255, 0, 0, 0.025) 4px
+    );
+}
+
+@keyframes blink {
+    0%, 45% {
+        opacity: 1;
+    }
+
+    50%, 100% {
+        opacity: 0.35;
+    }
+}
+
+@media (max-width: 600px) {
+    .top-bar {
+        padding: 18px;
+        font-size: 9px;
+    }
+
+    h1 {
+        font-size: 55px;
+        letter-spacing: 10px;
+        margin-left: 10px;
+    }
+
+    .subtitle {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    .boot-text {
+        width: 280px;
+        font-size: 10px;
+    }
+
+    .bottom-bar {
+        gap: 15px;
+        flex-wrap: wrap;
+        font-size: 8px;
+    }
+}
