@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" type="image.png" href="Pictures/favicon.png">
+</head>
+
+<body>
+
+    <div class="desktop"></div>
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+            <a href="https://github.com/amateurtechguy/AmateurOS" style="text-decoration: none;">
+            <button class="os-button">
+                <span class="logo">A</span>
+                <span>AmateurOS</span>
+            </button>
+            </a>
+            <button class="nav-button">Apps</button>
+            <button class="nav-button">Files</button>
+            <button class="nav-button">Settings</button>
+        </div>
+
+        <div class="topbar-center">
+            <span class="system-title">HOME</span>
+        </div>
+
+        <div class="topbar-right">
+            <span class="status">● Online</span>
+            <span class="time" id="clock">12:00</span>
+            <button class="power-button">⏻</button>
+        </div>
+
+    </header>
+
+    <main class="desktop-content">
+
+        
+    </main>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+
+            hours = hours.toString().padStart(2, "0");
+            minutes = minutes.toString().padStart(2, "0");
+
+            document.getElementById("clock").textContent = `${hours}:${minutes}`;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+
+</body>
+</html>
