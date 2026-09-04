@@ -20,6 +20,7 @@ By the time I'm making this, the home screen is still a bit horrible and bland b
 - [Jams tutorial](https://jams.hackclub.com/batch/webOS)
 - [Bro Code](https://www.youtube.com/channel/UC4SVo0Ue36XCfOyb5Lh1viQ)
 - [JQueryScript](https://youtu.be/qYa7PHgOVqw?si=zvN2SeJJX-AuUrb7)
+- [EGATOR](https://youtu.be/--XrIa-iey0?si=_px8puW_yzWkpjcA)
 
 ## Apps used:
 
