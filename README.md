@@ -21,6 +21,20 @@ By the time I'm making this, the home screen is still a bit horrible and bland b
 - [Bro Code](https://www.youtube.com/channel/UC4SVo0Ue36XCfOyb5Lh1viQ)
 - [JQueryScript](https://youtu.be/qYa7PHgOVqw?si=zvN2SeJJX-AuUrb7)
 
+## Apps used:
+
+- IbispaintX for favicon.
+- VS code for coding.
+- Youtube for tutorials.
+- Lapse/Hackatime to log my hours.
+- Slack to ask necessary questions.
+  
+## Programming languages used:
+
+- HTML
+- CSS
+- JAVASCRIPT
+  
 ---
 
 ## Creator:
