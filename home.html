@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="home.css">
-    <link rel="icon" type="image.png" href="Pictures/favicon.png">
+    <link rel="icon" type="image/png" href="Pictures/favicon.png">
 </head>
 
 <body>
@@ -15,50 +15,64 @@
     <header class="topbar">
 
         <div class="topbar-left">
-            <a href="https://github.com/amateurtechguy/AmateurOS" style="text-decoration: none;">
-            <button class="os-button">
-                <span class="logo">A</span>
-                <span>AmateurOS</span>
-            </button>
-            </a>
-            <button class="nav-button">Apps</button>
-            <button class="nav-button">Files</button>
-            <button class="nav-button">Settings</button>
-        </div>
 
-        <div class="topbar-center">
-            <span class="system-title">HOME</span>
+            <a href="https://github.com/amateurtechguy/AmateurOS" class="os-link">
+                <button class="os-button">
+                    <span class="logo">A</span>
+                    <span>AmateurOS</span>
+                </button>
+            </a>
+
+            <button class="nav-button" id="appsButton">Apps</button>
+            <button class="nav-button" id="filesButton">Files</button>
+            <button class="nav-button" id="settingsButton">Settings</button>
+
         </div>
 
         <div class="topbar-right">
-            <span class="status">● Online</span>
+
+            <span class="status">
+                <span class="status-dot"></span>
+                Online
+            </span>
+
             <span class="time" id="clock">12:00</span>
+
             <button class="power-button">⏻</button>
+
         </div>
 
     </header>
 
     <main class="desktop-content">
 
-        
+        <div class="window" id="homeWindow">
+
+            <div class="window-header">
+
+                <div class="window-title">
+                    <span class="window-icon">A</span>
+                    <span>AmateurOS</span>
+                </div>
+
+                <div class="window-buttons">
+                    <button class="window-button minimize">−</button>
+                    <button class="window-button maximize">□</button>
+                    <button class="window-button close">×</button>
+                </div>
+
+            </div>
+
+            <div class="window-content">
+                <h1>Welcome to AmateurOS</h1>
+                <p>Your desktop is ready.</p>
+            </div>
+
+        </div>
+
     </main>
 
-    <script>
-        function updateClock() {
-            const now = new Date();
-
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-
-            hours = hours.toString().padStart(2, "0");
-            minutes = minutes.toString().padStart(2, "0");
-
-            document.getElementById("clock").textContent = `${hours}:${minutes}`;
-        }
-
-        updateClock();
-        setInterval(updateClock, 1000);
-    </script>
+    <script src="home.js"></script>
 
 </body>
 </html>
