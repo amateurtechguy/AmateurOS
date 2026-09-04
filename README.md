@@ -3,6 +3,10 @@ AmateurOS is an OS based off of Edex UI's theme. Has anyone watched Mr.Robot and
 
 Click [here](https://amateurtechguy.github.io/AmateurOS/) to try the website out!
 
+
+⚠️DISCLAIMER: all backgrounds used are from google images, I did NOT make them!⚠️
+
+
 ## >> Welcome screen:
 
 This is the welcome screen, it looks like its loading your assets and checking your CPU, it's not, it's just to make it fit the whole hacker vibes.
