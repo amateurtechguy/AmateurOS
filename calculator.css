@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Share Tech Mono', monospace;
+}
+body {
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+#calculator {
+    background-color: black;
+    border-radius: 15px;
+    width: 500px;
+    max-width: 100%;
+    overflow: hidden;
+}
+#display {
+    display: block;
+    width: 100%;
+    height: 150px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    background-color: rgb(17, 15, 15);
+    color: red;
+    font-size: 5rem;
+    text-align: right;
+}
+#keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 25px;
+}
+button {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(27, 25, 25);
+    color: red;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgb(57, 53, 53);
+}
+button:active {
+    background-color: rgb(124, 115, 115);
+}
+.operator-btn {
+    background-color: rgb(112, 1, 1);
+    color: black;
+}
+.operator-btn:hover {
+    background-color: rgb(212, 14, 14);
+    color: rgb(28, 27, 27);
+}
+.operator-btn:active {
+    background-color: red;
+    color: rgb(124, 121, 121);
+}
