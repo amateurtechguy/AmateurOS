@@ -15,9 +15,10 @@ This is the welcome screen, it looks like its loading your assets and checking y
 
 ## >> Home screen:
 
-By the time I'm making this, the home screen is still a bit horrible and bland but by the time you're reading this, I'm pretty sure I should have added apps and files and updated how things look!
+A remade look of the home page, built from scratch with the same themes:O AND even an added calculator to the desktop screen (inspo taken from other stardance creators)
 
-<img width="959" height="539" alt="Screenshot 2026-09-03 180019" src="https://github.com/user-attachments/assets/1944b597-f46f-4255-b62b-b7ce7934f654" />
+<img width="953" height="533" alt="image" src="https://github.com/user-attachments/assets/38d71dba-f8aa-40e9-a151-b03c951d4546" />
+
 
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
