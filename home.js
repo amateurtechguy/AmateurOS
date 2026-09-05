@@ -154,7 +154,7 @@ document.getElementById("settingsButton").addEventListener("click",()=>{
         "Settings",
         `
         <h1>Settings</h1>
-        <p>AmateurOS system settings, still in progress:(</p>
+        <p>AmateurOS system settings, still in progress:( bugs will be fixed in the second ship so leave your reviews!</p>
         `
     );
 });
