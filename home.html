@@ -12,14 +12,13 @@
 
     <div class="desktop"></div>
 
-    <header class="topbar">
+    <header class="toolbar">
 
-        <div class="topbar-left">
+        <div class="toolbar-left">
 
             <a href="https://github.com/amateurtechguy/AmateurOS" class="os-link">
                 <button class="os-button">
                     <span class="logo">A</span>
-                    <span>AmateurOS</span>
                 </button>
             </a>
 
@@ -29,7 +28,7 @@
 
         </div>
 
-        <div class="topbar-right">
+        <div class="toolbar-right">
 
             <span class="status">
                 <span class="status-dot"></span>
@@ -44,34 +43,38 @@
 
     </header>
 
-    <main class="desktop-content">
+    <main class="desktopcontent">
 
-        <div class="window" id="homeWindow">
+    <div class="window" id="homeWindow">
 
-            <div class="window-header">
-
-                <div class="window-title">
-                    <span class="window-icon">A</span>
-                    <span>AmateurOS</span>
-                </div>
-
-                <div class="window-buttons">
-                    <button class="window-button minimize">−</button>
-                    <button class="window-button maximize">□</button>
-                    <button class="window-button close">×</button>
-                </div>
-
+        <div class="window-header">
+            <div class="window-title">
+                <span class="window-icon">A</span>
+                <span>AmateurOS</span>
             </div>
 
-            <div class="window-content">
-                <h1>Welcome to AmateurOS</h1>
-                <p>Your desktop is ready.</p>
+            <div class="window-buttons">
+                <button class="minimize">−</button>
+                <button class="maximize">□</button>
+                <button class="close">×</button>
             </div>
-
         </div>
 
-    </main>
+        <div class="windowcontent">
+            <h1>Welcome to AmateurOS</h1>
+            <p>Your desktop is ready, Make sure to leave a positive review on this operating system, I really worked hard on this project and I think it's one of my most impressive projects! *ALSO DOUBLE CLICK ANY DESKTOP APP TO OPEN IT*</p>
+        </div>
 
+    </div>
+
+    <div class="app-icon" id="calculatorApp">
+        <div class="calc-icon">
+            <img src="Pictures/calculator.png" alt="Calculator">
+        </div>
+        <span>Calculator</span>
+    </div>
+ </main>
+   
     <script src="home.js"></script>
 
 </body>
