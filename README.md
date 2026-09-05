@@ -26,6 +26,7 @@ A remade look of the home page, built from scratch with the same themes:O AND ev
 - [Bro Code](https://www.youtube.com/channel/UC4SVo0Ue36XCfOyb5Lh1viQ)
 - [JQueryScript](https://youtu.be/qYa7PHgOVqw?si=zvN2SeJJX-AuUrb7)
 - [EGATOR](https://youtu.be/--XrIa-iey0?si=_px8puW_yzWkpjcA)
+- [Calculator](https://youtu.be/I5kj-YsmWjM?si=28cN04ELpLWV6IAY)
 
 ## Apps used:
 
