@@ -17,7 +17,7 @@ This is the welcome screen, it looks like its loading your assets and checking y
 
 This is going to be your desktop! It has all the basic features a operating system needs, that includes: Files, apps, a clock, and settings!
 
-<img width="959" height="539" alt="Screenshot 2026-09-06 153247" src="https://github.com/user-attachments/assets/c3ccb794-1a7f-4577-9679-1ee849864d90" />
+<img width="947" height="430" alt="image" src="https://github.com/user-attachments/assets/64c6d05e-e33f-444d-bb0b-bb7af7de3ea2" />
 
 
 ## Credits:
