@@ -15,9 +15,9 @@ This is the welcome screen, it looks like its loading your assets and checking y
 
 ## >> Home screen:
 
-A remade look of the home page, built from scratch with the same themes:O AND even an added calculator to the desktop screen (inspo taken from other stardance creators)
+This is going to be your desktop! It has all the basic features a operating system needs, that includes: Files, apps, a clock, and settings!
 
-<img width="953" height="533" alt="image" src="https://github.com/user-attachments/assets/38d71dba-f8aa-40e9-a151-b03c951d4546" />
+<img width="959" height="539" alt="Screenshot 2026-09-06 153247" src="https://github.com/user-attachments/assets/c3ccb794-1a7f-4577-9679-1ee849864d90" />
 
 
 ## Credits:
