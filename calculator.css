@@ -32,3 +32,38 @@ body {
     font-size: 2.2rem;
     text-align: right;
 }
+#keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    padding: 10px;
+}
+button {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(27, 25, 25);
+    color: red;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgb(57, 53, 53);
+}
+button:active {
+    background-color: rgb(124, 115, 115);
+}
+.operator-btn {
+    background-color: rgb(112, 1, 1);
+    color: black;
+}
+.operator-btn:hover {
+    background-color: rgb(212, 14, 14);
+    color: rgb(28, 27, 27);
+}
+.operator-btn:active {
+    background-color: red;
+    color: rgb(124, 121, 121);
+}
