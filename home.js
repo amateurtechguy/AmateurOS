@@ -7,6 +7,23 @@ function updateClock(){
 updateClock();
 setInterval(updateClock,1000);
 let highestZIndex=100;
+function updateDateTime() {
+    const now = new Date();
+    const time = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+    const date = now.toLocaleDateString([], {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    document.querySelector('.time').textContent = time;
+    document.querySelector('.date').textContent = date;
+}
+updateDateTime();
+setInterval(updateDateTime, 1000);
 function bringToFront(w){
     w.style.zIndex=++highestZIndex;
     document.querySelectorAll(".window").forEach(x=>x.classList.remove("active"));
