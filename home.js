@@ -7,87 +7,113 @@ function updateClock(){
 updateClock();
 setInterval(updateClock,1000);
 let highestZIndex=100;
-function bringToFront(windowElement){
-    highestZIndex++;
-    windowElement.style.zIndex=highestZIndex;
-    document.querySelectorAll(".window").forEach((win)=>{
-        win.classList.remove("active");
-    });
-    windowElement.classList.add("active");
+function bringToFront(w){
+    w.style.zIndex=++highestZIndex;
+    document.querySelectorAll(".window").forEach(x=>x.classList.remove("active"));
+    w.classList.add("active");
 }
-function makeWindowDraggable(windowElement){
-    const header=windowElement.querySelector(".window-header");
-    const minimizeButton=windowElement.querySelector(".minimize");
-    const maximizeButton=windowElement.querySelector(".maximize");
-    const closeButton=windowElement.querySelector(".close");
+function makeWindowDraggable(w){
+    const header=w.querySelector(".window-header");
     let dragging=false;
     let offsetX=0;
     let offsetY=0;
-    header.addEventListener("pointerdown",(event)=>{
-        if(event.target.closest(".window-buttons")){
-            return;
-        }
-        if(windowElement.classList.contains("maximized")){
-            return;
-        }
+    header.addEventListener("pointerdown",e=>{
+        if(e.target.closest(".window-buttons")||w.classList.contains("maximized"))return;
+        const r=w.getBoundingClientRect();
         dragging=true;
-        const rect=windowElement.getBoundingClientRect();
-        offsetX=event.clientX-rect.left;
-        offsetY=event.clientY-rect.top;
-        header.setPointerCapture(event.pointerId);
-        bringToFront(windowElement);
+        offsetX=e.clientX-r.left;
+        offsetY=e.clientY-r.top;
+        header.setPointerCapture(e.pointerId);
+        bringToFront(w);
     });
-    header.addEventListener("pointermove",(event)=>{
-        if(!dragging){
-            return;
-        }
-        let x=event.clientX-offsetX;
-        let y=event.clientY-offsetY;
-        const maxX=window.innerWidth-windowElement.offsetWidth;
-        const maxY=window.innerHeight-windowElement.offsetHeight;
-        x=Math.max(0,Math.min(x,maxX));
-        y=Math.max(0,Math.min(y,maxY));
-        windowElement.style.left=`${x}px`;
-        windowElement.style.top=`${y}px`;
+    header.addEventListener("pointermove",e=>{
+        if(!dragging)return;
+        let x=e.clientX-offsetX;
+        let y=e.clientY-offsetY;
+        x=Math.max(0,Math.min(x,innerWidth-w.offsetWidth));
+        y=Math.max(0,Math.min(y,innerHeight-w.offsetHeight));
+        w.style.left=x+"px";
+        w.style.top=y+"px";
     });
-    header.addEventListener("pointerup",(event)=>{
+    header.addEventListener("pointerup",e=>{
         dragging=false;
-        if(header.hasPointerCapture(event.pointerId)){
-            header.releasePointerCapture(event.pointerId);
+        if(header.hasPointerCapture(e.pointerId)){
+            header.releasePointerCapture(e.pointerId);
         }
     });
     header.addEventListener("pointercancel",()=>{
         dragging=false;
     });
-    if(minimizeButton){
-        minimizeButton.addEventListener("click",(event)=>{
-            event.stopPropagation();
-            windowElement.classList.toggle("minimized");
-            bringToFront(windowElement);
+}
+function makeWindowResizable(w){
+    w.querySelectorAll(".resize-handle").forEach(handle=>{
+        handle.addEventListener("pointerdown",e=>{
+            if(w.classList.contains("maximized")||w.classList.contains("minimized"))return;
+            e.preventDefault();
+            e.stopPropagation();
+            const r=w.getBoundingClientRect();
+            const startX=e.clientX;
+            const startY=e.clientY;
+            const startWidth=r.width;
+            const startHeight=r.height;
+            const startLeft=r.left;
+            const startTop=r.top;
+            const direction=[...handle.classList].find(x=>x.startsWith("resize-"));
+            const resize=e=>{
+                const dx=e.clientX-startX;
+                const dy=e.clientY-startY;
+                let width=startWidth;
+                let height=startHeight;
+                let left=startLeft;
+                let top=startTop;
+                if(direction.includes("e"))width=startWidth+dx;
+                if(direction.includes("w")){
+                    width=startWidth-dx;
+                    left=startLeft+dx;
+                }
+                if(direction.includes("s"))height=startHeight+dy;
+                if(direction.includes("n")){
+                    height=startHeight-dy;
+                    top=startTop+dy;
+                }
+                if(width<300){
+                    if(direction.includes("w"))left=startLeft+startWidth-300;
+                    width=300;
+                }
+                if(height<180){
+                    if(direction.includes("n"))top=startTop+startHeight-180;
+                    height=180;
+                }
+                left=Math.max(0,left);
+                top=Math.max(0,top);
+                width=Math.min(width,innerWidth-left);
+                height=Math.min(height,innerHeight-top);
+                w.style.left=`${left}px`;
+                w.style.top=`${top}px`;
+                w.style.width=`${width}px`;
+                w.style.height=`${height}px`;
+            };
+            const stop=()=>{
+                removeEventListener("pointermove",resize);
+                removeEventListener("pointerup",stop);
+            };
+            addEventListener("pointermove",resize);
+            addEventListener("pointerup",stop);
+            bringToFront(w);
         });
-    }
-    if(maximizeButton){
-        maximizeButton.addEventListener("click",(event)=>{
-            event.stopPropagation();
-            windowElement.classList.toggle("maximized");
-            maximizeButton.textContent=windowElement.classList.contains("maximized")?"❐":"□";
-            bringToFront(windowElement);
-        });
-    }
-    if(closeButton){
-        closeButton.addEventListener("click",(event)=>{
-            event.stopPropagation();
-            windowElement.remove();
-        });
-    }
-    windowElement.addEventListener("pointerdown",()=>{
-        bringToFront(windowElement);
+    });
+}
+function addResizeHandles(w){
+    ["n","s","e","w","ne","nw","se","sw"].forEach(direction=>{
+        const handle=document.createElement("div");
+        handle.className=`resize-handle resize-${direction}`;
+        w.appendChild(handle);
     });
 }
 function createWindow(title,content){
-    const windowElement=document.createElement("div");
-    windowElement.className="window";
-    windowElement.innerHTML=`
+    const w=document.createElement("div");
+    w.className="window";
+    w.innerHTML=`
         <div class="window-header">
             <div class="window-title">
                 <span class="window-icon">A</span>
@@ -103,18 +129,38 @@ function createWindow(title,content){
             ${content}
         </div>
     `;
+    addResizeHandles(w);
     const windowCount=document.querySelectorAll(".window").length;
     const offset=windowCount*30;
-    windowElement.style.left=`${150+offset}px`;
-    windowElement.style.top=`${160+offset}px`;
-    document.querySelector(".desktopcontent").appendChild(windowElement);
-    makeWindowDraggable(windowElement);
-    bringToFront(windowElement);
-    return windowElement;
+    w.style.left=`${150+offset}px`;
+    w.style.top=`${160+offset}px`;
+    document.querySelector(".desktopcontent").appendChild(w);
+    makeWindowDraggable(w);
+    makeWindowResizable(w);
+    bringToFront(w);
+    w.querySelector(".minimize").addEventListener("click",e=>{
+        e.stopPropagation();
+        w.classList.toggle("minimized");
+        bringToFront(w);
+    });
+    w.querySelector(".maximize").addEventListener("click",e=>{
+        e.stopPropagation();
+        w.classList.toggle("maximized");
+        w.querySelector(".maximize").textContent=
+            w.classList.contains("maximized")?"❐":"□";
+        bringToFront(w);
+    });
+    w.querySelector(".close").addEventListener("click",e=>{
+        e.stopPropagation();
+        w.remove();
+    });
+    return w;
 }
 const initialWindow=document.getElementById("homeWindow");
 if(initialWindow){
+    addResizeHandles(initialWindow);
     makeWindowDraggable(initialWindow);
+    makeWindowResizable(initialWindow);
     bringToFront(initialWindow);
 }
 document.getElementById("appsButton").addEventListener("click",()=>{
@@ -122,6 +168,7 @@ document.getElementById("appsButton").addEventListener("click",()=>{
         "Apps",
         `
         <h1>Apps</h1>
+
         <div class="app-list">
             <button class="app-launcher" id="calculatorLauncher">
                 <img src="Pictures/calculator.png" alt="Calculator">
@@ -135,7 +182,7 @@ document.getElementById("appsButton").addEventListener("click",()=>{
         calculatorLauncher.addEventListener("click",()=>{
             createWindow(
                 "Calculator",
-                `<iframe src="calculator.html" class="calculator-frame"></iframe>`
+                `<iframe src="calculator.html" class="calculatorframe"></iframe>`
             );
         });
     }
@@ -154,7 +201,7 @@ document.getElementById("settingsButton").addEventListener("click",()=>{
         "Settings",
         `
         <h1>Settings</h1>
-        <p>AmateurOS system settings, still in progress:( bugs will be fixed in the second ship so leave your reviews!</p>
+        <p>AmateurOS system settings, still in progress:(</p>
         `
     );
 });
@@ -167,24 +214,18 @@ if(calculatorApp){
         );
     });
 }
-document.addEventListener("keydown",(event)=>{
-    if(event.key!=="Escape"){
-        return;
-    }
+document.addEventListener("keydown",event=>{
+    if(event.key!=="Escape")return;
     const windows=document.querySelectorAll(".window");
-    if(windows.length===0){
-        return;
-    }
+    if(windows.length===0)return;
     let activeWindow=null;
     let highest=-1;
-    windows.forEach((windowElement)=>{
-        const zIndex=parseInt(windowElement.style.zIndex)||0;
-        if(zIndex>highest){
-            highest=zIndex;
-            activeWindow=windowElement;
+    windows.forEach(w=>{
+        const z=parseInt(w.style.zIndex)||0;
+        if(z>highest){
+            highest=z;
+            activeWindow=w;
         }
     });
-    if(activeWindow){
-        activeWindow.remove();
-    }
+    if(activeWindow)activeWindow.remove();
 });
