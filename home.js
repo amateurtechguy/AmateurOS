@@ -36,7 +36,6 @@ function bringToFront(w){
     document.querySelectorAll(".window").forEach(x=>{
         x.classList.remove("active");
     });
-
     w.classList.add("active");
 }
 function makeWindowDraggable(w){
@@ -402,7 +401,6 @@ if(filesButton){
             "Files",
             `
             <h1>Files</h1>
-
             <p>
                 Your files and folders will appear here, if only the creator
                 wasn't saving that feature for ship 2..
@@ -418,7 +416,6 @@ if(settingsButton){
             "Settings",
             `
             <h1>Settings</h1>
-
             <p>
                 AmateurOS system settings, still in progress:(
             </p>
@@ -460,4 +457,35 @@ document.addEventListener("keydown",event=>{
     if(activeWindow){
         closeWindow(activeWindow);
     }
+});
+/* DESKTOP APPS ONLY — ADDED FIX */
+document.querySelectorAll(".app-icon,.desktop-app").forEach(app=>{
+    app.style.pointerEvents="auto";
+    app.addEventListener("dblclick",e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        const id=(app.id||"").toLowerCase();
+        const appName=(app.dataset.app||"").toLowerCase();
+        if(id==="calculatorapp"||id==="calculatorapp"||appName==="calculator"){
+            createWindow(
+                "Calculator",
+                `
+                <iframe
+                    src="calculator.html"
+                    class="calculatorframe"
+                ></iframe>
+                `
+            );
+        }else if(id==="journalapp"||id==="journalapp"||appName==="journal"){
+            createWindow(
+                "Journal",
+                `
+                <iframe
+                    src="journal.html"
+                    class="journalframe"
+                ></iframe>
+                `
+            );
+        }
+    });
 });
