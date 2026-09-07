@@ -303,6 +303,28 @@ body {
     box-shadow: 0 0 10px #f00;
     object-fit: contain;
 }
+#journalapp {
+    top: 20px;
+    left: 120px;
+}
+#journalapp .journal-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#journalapp .journal-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: contain;
+    box-shadow: 0 0 10px #f00;
+}
+#journalapp:hover .journal-icon img {
+    box-shadow: 0 0 15px #f00;
+}
 .app-icon span {
     display: block;
     font-size: 15px;
