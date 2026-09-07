@@ -344,10 +344,10 @@ const initialWindow=document.getElementById("homeWindow");
 if(initialWindow){
     setupWindow(initialWindow);
 }
-const appsButton=document.getElementById("appsButton");
-if(appsButton){
-    appsButton.addEventListener("click",()=>{
-        const appsWindow=createWindow(
+const appsButton = document.getElementById("appsButton");
+if (appsButton) {
+    appsButton.addEventListener("click", () => {
+        const appsWindow = createWindow(
             "Apps",
             `
             <h1>Apps</h1>
@@ -356,19 +356,38 @@ if(appsButton){
                     <img src="Pictures/calculator.png" alt="Calculator">
                     <span>Calculator</span>
                 </button>
+                <button class="app-launcher" id="journalLauncher">
+                    <img src="Pictures/journal.jpg" alt="Journal">
+                    <span>Journal</span>
+                </button>
             </div>
             `
         );
-        const calculatorLauncher=
+        const calculatorLauncher =
             appsWindow.querySelector("#calculatorLauncher");
-        if(calculatorLauncher){
-            calculatorLauncher.addEventListener("click",()=>{
+        if (calculatorLauncher) {
+            calculatorLauncher.addEventListener("click", () => {
                 createWindow(
                     "Calculator",
                     `
                     <iframe
                         src="calculator.html"
                         class="calculatorframe"
+                    ></iframe>
+                    `
+                );
+            });
+        }
+        const journalLauncher =
+            appsWindow.querySelector("#journalLauncher");
+        if (journalLauncher) {
+            journalLauncher.addEventListener("click", () => {
+                createWindow(
+                    "Journal",
+                    `
+                    <iframe
+                        src="journal.html"
+                        class="journalframe"
                     ></iframe>
                     `
                 );
