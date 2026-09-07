@@ -27,6 +27,7 @@ This is going to be your desktop! It has all the basic features a operating syst
 - [JQueryScript](https://youtu.be/qYa7PHgOVqw?si=zvN2SeJJX-AuUrb7)
 - [EGATOR](https://youtu.be/--XrIa-iey0?si=_px8puW_yzWkpjcA)
 - [Calculator](https://youtu.be/I5kj-YsmWjM?si=28cN04ELpLWV6IAY)
+- [resizeable windows](https://youtu.be/NpBZtR1nLwA?si=oKSESAqemRRQhz_I)
 
 ## Apps used:
 
