@@ -19,6 +19,11 @@ This is going to be your desktop! It has all the basic features a operating syst
 
 <img width="947" height="430" alt="image" src="https://github.com/user-attachments/assets/64c6d05e-e33f-444d-bb0b-bb7af7de3ea2" />
 
+## >> Calculator app:
+
+An app that obviously lets you calculate stuff! Inspired by Bro Code's tutorials:)
+
+<img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/4e38ccef-1538-4664-a5bc-fb6aaaf8e63b" />
 
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
