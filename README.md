@@ -38,7 +38,8 @@ This app is an app that lets you store your notes in, delete them, save them and
 - [JQueryScript](https://youtu.be/qYa7PHgOVqw?si=zvN2SeJJX-AuUrb7)
 - [EGATOR](https://youtu.be/--XrIa-iey0?si=_px8puW_yzWkpjcA)
 - [Calculator](https://youtu.be/I5kj-YsmWjM?si=28cN04ELpLWV6IAY)
-- [resizeable windows](https://youtu.be/NpBZtR1nLwA?si=oKSESAqemRRQhz_I)
+- [Resizeable windows](https://youtu.be/NpBZtR1nLwA?si=oKSESAqemRRQhz_I)
+- [Journal](https://www.youtube.com/watch?v=gzoifHuIsrI)
 
 ## Apps used:
 
