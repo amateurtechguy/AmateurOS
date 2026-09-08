@@ -8,56 +8,45 @@
     <link rel="icon" type="image.png" href="Pictures/favicon.png">
 </head>
 <body>
-
     <div class="app">
         <aside class="sidebar">
             <div class="logo">
                 <span>✦</span>
                 Notes
             </div>
-
             <button class="add-note-btn" id="addNoteBtn">
                 <span>+</span>
                 New Note
             </button>
-
             <div class="notes-list" id="notesList"></div>
         </aside>
-
         <main class="main">
             <header class="header">
                 <div>
                     <h1 id="pageTitle">My Notes</h1>
                     <p id="noteCount">0 notes</p>
                 </div>
-
                 <div class="search">
                     <span>⌕</span>
                     <input type="text" id="searchInput" placeholder="Search notes...">
                 </div>
             </header>
-
             <section class="editor">
                 <input
                     type="text"
                     id="titleInput"
                     placeholder="Note title"
-                    autocomplete="off"
-                >
-
+                    autocomplete="off">
                 <textarea
                     id="contentInput"
                     placeholder="Start writing..."
                 ></textarea>
-
                 <div class="editor-footer">
                     <span id="saveStatus">Saved</span>
-
                     <div class="actions">
                         <button class="delete-btn" id="deleteBtn">
                             Delete
                         </button>
-
                         <button class="save-btn" id="saveBtn">
                             Save Note
                         </button>
@@ -66,7 +55,6 @@
             </section>
         </main>
     </div>
-
     <script src="journal.js"></script>
 </body>
 </html>
