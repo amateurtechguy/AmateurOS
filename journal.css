@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background: #000;
+    color: #ff1a1a;
+}
+button, input, textarea {
+    font: inherit;
+}
+button {
+    cursor: pointer;
+}
+.app {
+    display: flex;
+    min-height: 100vh;
+    background: #000;
+}
+.sidebar {
+    width: 280px;
+    min-height: 100vh;
+    background: #080808;
+    border-right: 1px solid #3b0000;
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff1a1a;
+    padding: 0 12px 28px;
+}
+.logo span {
+    width: 34px;
+    height: 34px;
+    background: #ff0000;
+    color: #000;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.35);
+}
+.add-note-btn {
+    width: 100%;
+    border: 1px solid #ff0000;
+    background: #ff0000;
+    color: #000;
+    padding: 13px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    transition: 0.2s;
+}
+.add-note-btn:hover {
+    background: #000;
+    color: #ff0000;
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.3);
+}
+.add-note-btn span {
+    font-size: 21px;
+    line-height: 1;
+}
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+}
+.note-item {
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid transparent;
+}
+.note-item:hover {
+    background: #160000;
+    border-color: #3b0000;
+}
+.note-item.active {
+    background: #190000;
+    border-color: #700000;
+    box-shadow: inset 3px 0 0 #ff0000;
+}
+.note-item h3 {
+    color: #ff2020;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.note-item p {
+    color: #cc3333;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.note-date {
+    color: #7a2020;
+    font-size: 11px;
+    margin-top: 8px;
+}
+.main {
+    flex: 1;
+    min-width: 0;
+    background: #000;
+}
+.header {
+    min-height: 100px;
+    padding: 25px 45px;
+    background: #050505;
+    border-bottom: 1px solid #3b0000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+.header h1 {
+    color: #ff0000;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+.header p {
+    color: #8f2222;
+    font-size: 13px;
+}
+.search {
+    width: 280px;
+    height: 43px;
+    background: #0d0000;
+    border: 1px solid #4a0000;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    padding: 0 13px;
+    gap: 8px;
+}
+.search:focus-within {
+    border-color: #ff0000;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
+}
+.search span {
+    font-size: 22px;
+    color: #ff0000;
+}
+.search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    color: #ff3333;
+    font-size: 13px;
+}
+.search input::placeholder {
+    color: #702020;
+}
+.editor {
+    max-width: 900px;
+    margin: 45px auto;
+    padding: 0 35px;
+}
+#titleInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ff0000;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+#titleInput::placeholder {
+    color: #4d1111;
+}
+#contentInput {
+    width: 100%;
+    min-height: 500px;
+    resize: vertical;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e63333;
+    font-size: 16px;
+    line-height: 1.8;
+}
+#contentInput::placeholder {
+    color: #641818;
+}
+.editor-footer {
+    border-top: 1px solid #3b0000;
+    padding-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#saveStatus {
+    color: #7a2222;
+    font-size: 12px;
+}
+.actions {
+    display: flex;
+    gap: 10px;
+}
+.delete-btn, .save-btn {
+    border-radius: 8px;
+    padding: 10px 17px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.delete-btn {
+    border: 1px solid #700000;
+    background: #180000;
+    color: #ff2222;
+}
+.delete-btn:hover {
+    background: #300000;
+    border-color: #ff0000;
+}
+.save-btn {
+    border: 1px solid #ff0000;
+    background: #ff0000;
+    color: #000;
+}
+.save-btn:hover {
+    background: #000;
+    color: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+.empty {
+    text-align: center;
+    padding: 25px 10px;
+    color: #661919;
+    font-size: 13px;
+}
+::selection {
+    background: #ff0000;
+    color: #000;
+}
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #050505;
+}
+::-webkit-scrollbar-thumb {
+    background: #4d0000;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff0000;
+}
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #3b0000;
+        padding: 18px;
+    }
+    .logo {
+        padding-bottom: 18px;
+    }
+    .add-note-btn {
+        margin-bottom: 15px;
+    }
+    .notes-list {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    .note-item {
+        min-width: 170px;
+    }
+    .header {
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search {
+        width: 100%;
+    }
+    .editor {
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+    #titleInput {
+        font-size: 28px;
+    }
+    #contentInput {
+        min-height: 400px;
+    }
+}
