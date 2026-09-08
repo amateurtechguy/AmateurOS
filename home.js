@@ -417,7 +417,7 @@ if(settingsButton){
             `
             <h1>Settings</h1>
             <p>
-                AmateurOS system settings, still in progress:(
+                AmateurOS system settings, still in progress:( hopefully up and running for ship 3!
             </p>
             `
         );
