@@ -122,6 +122,9 @@ button {
     flex: 1;
     min-width: 0;
     background: #000;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 .header {
     min-height: 100px;
@@ -174,8 +177,13 @@ button {
 }
 .editor {
     max-width: 900px;
-    margin: 45px auto;
-    padding: 0 35px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 35px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 #titleInput {
     width: 100%;
@@ -186,13 +194,14 @@ button {
     font-size: 34px;
     font-weight: 700;
     margin-bottom: 25px;
+    width: 100%;
+    flex-shrink: 0;
 }
 #titleInput::placeholder {
     color: #4d1111;
 }
 #contentInput {
     width: 100%;
-    min-height: 500px;
     resize: vertical;
     border: none;
     outline: none;
@@ -200,6 +209,10 @@ button {
     color: #e63333;
     font-size: 16px;
     line-height: 1.8;
+    flex: 1;
+    min-height: 0;
+    resize: none;
+    overflow-y: auto;
 }
 #contentInput::placeholder {
     color: #641818;
@@ -210,6 +223,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-shrink: 0;
+    margin-top: 20px;
 }
 #saveStatus {
     color: #7a2222;
@@ -266,47 +281,4 @@ button {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #ff0000;
-}
-@media (max-width: 768px) {
-    .app {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        min-height: auto;
-        border-right: none;
-        border-bottom: 1px solid #3b0000;
-        padding: 18px;
-    }
-    .logo {
-        padding-bottom: 18px;
-    }
-    .add-note-btn {
-        margin-bottom: 15px;
-    }
-    .notes-list {
-        flex-direction: row;
-        overflow-x: auto;
-    }
-    .note-item {
-        min-width: 170px;
-    }
-    .header {
-        padding: 20px;
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .search {
-        width: 100%;
-    }
-    .editor {
-        margin: 30px auto;
-        padding: 0 20px;
-    }
-    #titleInput {
-        font-size: 28px;
-    }
-    #contentInput {
-        min-height: 400px;
-    }
 }
