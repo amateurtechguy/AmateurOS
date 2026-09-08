@@ -25,6 +25,12 @@ An app that obviously lets you calculate stuff! Inspired by Bro Code's tutorials
 
 <img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/4e38ccef-1538-4664-a5bc-fb6aaaf8e63b" />
 
+## >> Journal app:
+
+This app is an app that lets you store your notes in, delete them, save them and sometimes if you have too many you can even search for them! and the best part of it all is the fact the notes are remembered:D
+
+<img width="946" height="422" alt="image" src="https://github.com/user-attachments/assets/4c7c71e3-7fec-4774-85d0-9918be63fc91" />
+
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
 - [Jams tutorial](https://jams.hackclub.com/batch/webOS)
