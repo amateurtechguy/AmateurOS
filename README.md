@@ -38,6 +38,12 @@ You can now search for literally anything on AmateurOS! and it'll give you the a
 
 <img width="931" height="427" alt="image" src="https://github.com/user-attachments/assets/aa95459f-8774-4af5-9b23-3d04b5e5ae0b" />
 
+## >> News app:
+
+This is a news app that only redirects you to the website in the credits it's not ACTUALLY coded by me, remember to work smarter not harder 
+
+<img width="956" height="539" alt="image" src="https://github.com/user-attachments/assets/1de1c608-edd3-4521-a5d4-5d601c9374b7" />
+
 
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
@@ -48,6 +54,7 @@ You can now search for literally anything on AmateurOS! and it'll give you the a
 - [Calculator](https://youtu.be/I5kj-YsmWjM?si=28cN04ELpLWV6IAY)
 - [Resizeable windows](https://youtu.be/NpBZtR1nLwA?si=oKSESAqemRRQhz_I)
 - [Journal](https://www.youtube.com/watch?v=gzoifHuIsrI)
+- [News](https://time.com/)
 
 ## Apps used:
 
