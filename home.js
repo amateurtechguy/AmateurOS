@@ -417,7 +417,7 @@ if(settingsButton){
             `
             <h1>Settings</h1>
             <p>
-                AmateurOS system settings, still in progress:( hopefully up and running for ship 3!
+                AmateurOS system settings, still in progress:(
             </p>
             `
         );
@@ -458,7 +458,6 @@ document.addEventListener("keydown",event=>{
         closeWindow(activeWindow);
     }
 });
-/* DESKTOP APPS ONLY — ADDED FIX */
 document.querySelectorAll(".app-icon,.desktop-app").forEach(app=>{
     app.style.pointerEvents="auto";
     app.addEventListener("dblclick",e=>{
@@ -489,3 +488,53 @@ document.querySelectorAll(".app-icon,.desktop-app").forEach(app=>{
         }
     });
 });
+const desktopSearch = document.getElementById("desktopSearch");
+if (desktopSearch) {
+    desktopSearch.addEventListener("keydown", event => {
+        if (event.key !== "Enter") return;
+        const query = desktopSearch.value.trim();
+        if (!query) return;
+        openSearchWindow(query);
+        desktopSearch.value = "";
+        desktopSearch.blur();
+    });
+}
+function openSearchWindow(query) {
+    const googleURL =
+    "https://www.google.com/search?igu=1&q=" +
+    encodeURIComponent(query);
+    createWindow(
+        "Search",
+        `
+            <iframe
+                class="searchframe"
+                src="${googleURL}"
+                title="Google Search"
+            ></iframe>
+        </div>
+        `
+    );
+    const windows = document.querySelectorAll(".window");
+    const searchWindow = windows[windows.length - 1];
+    const input = searchWindow.querySelector(".search-window-input");
+    const goButton = searchWindow.querySelector(".search-go");
+    const frame = searchWindow.querySelector(".search-frame");
+    function performSearch() {
+        const newQuery = input.value.trim();
+        if (!newQuery) return;
+      frame.src =
+    "https://www.google.com/search?igu=1&q=" +
+    encodeURIComponent(newQuery);
+    }
+    input.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            performSearch();
+        }
+    });
+    goButton.addEventListener("click", performSearch);
+}
+function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
