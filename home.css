@@ -266,6 +266,9 @@ body {
     font-size: 30px;
     text-shadow: 0 0 10px rgba(255,0,0,.5);
 }
+.desktop-app{
+    pointer-events: auto;
+}
 .windowcontent p {
     color: #aaa;
     font-size: 15px;
@@ -366,7 +369,7 @@ body {
     border-radius: 10px;
     object-fit: contain;
 }
-.calculatorframe {
+.calculatorframe .journalframe {
     display: block;
     width: 100%;
     height: 100%;
@@ -381,12 +384,18 @@ body {
     top: auto;
     bottom: 60px;
 }
-.windowcontent:has(.calculatorframe) {
+.window:has(.calculatorframe) {
+    width: 600px;
+    height: 600px;
+    top: auto;
+    bottom: 60px;
+}
+.windowcontent:has(.calculatorframe), .windowcontent:has(.journalframe) {
     padding: 0;
     overflow: hidden;
     height: calc(100% - 45px);
 }
-.windowcontent .calculatorframe {
+.windowcontent .calculatorframe, .windowcontent .journalframe {
     position: absolute;
     left: 0;
     top: 45px;
