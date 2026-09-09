@@ -359,6 +359,10 @@ if (appsButton) {
                     <img src="Pictures/journal.jpg" alt="Journal">
                     <span>Journal</span>
                 </button>
+                  <button class="app-launcher" id="newsLauncher">
+                    <img src="Pictures/IMG_1699.jpg" alt="News">
+                    <span>News</span>
+                </button>
             </div>
             `
         );
@@ -392,19 +396,34 @@ if (appsButton) {
                 );
             });
         }
+       const newsLauncher =
+            appsWindow.querySelector("#newsLauncher");
+        if (newsLauncher) {
+            newsLauncher.addEventListener("click", () => {
+                createWindow(
+                    "News",
+                    `
+                    <iframe
+                        src="https://time.com/"
+                        class="newsframe"
+                    ></iframe>
+                    `
+                );
+            });
+        }
     });
 }
-const filesButton=document.getElementById("filesButton");
-if(filesButton){
-    filesButton.addEventListener("click",()=>{
+const filesButton = document.getElementById("filesButton");
+if (filesButton) {
+    filesButton.addEventListener("click", () => {
         createWindow(
             "Files",
             `
-            <h1>Files</h1>
-            <p>
-                Your files and folders will appear here, if only the creator
-                wasn't saving that feature for ship 2..
-            </p>
+            <iframe
+                src="files.html"
+                class="filesframe"
+                title="Files"
+            ></iframe>
             `
         );
     });
@@ -482,6 +501,16 @@ document.querySelectorAll(".app-icon,.desktop-app").forEach(app=>{
                 <iframe
                     src="journal.html"
                     class="journalframe"
+                ></iframe>
+                `
+            );
+        }else if(id==="newsapp"||id==="newsapp"||appName==="news"){
+            createWindow(
+                "News",
+                `
+                <iframe
+                    src="https://time.com/"
+                    class="newsframe"
                 ></iframe>
                 `
             );
