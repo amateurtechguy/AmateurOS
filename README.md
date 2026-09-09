@@ -31,6 +31,14 @@ This app is an app that lets you store your notes in, delete them, save them and
 
 <img width="946" height="422" alt="image" src="https://github.com/user-attachments/assets/4c7c71e3-7fec-4774-85d0-9918be63fc91" />
 
+## >> Search bar:
+
+You can now search for literally anything on AmateurOS! and it'll give you the answer:D. Idea was taken from a previous project that goes by the name of [AmateurTab](https://github.com/amateurtechguy/AmateurTab)
+
+
+<img width="931" height="427" alt="image" src="https://github.com/user-attachments/assets/aa95459f-8774-4af5-9b23-3d04b5e5ae0b" />
+
+
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
 - [Jams tutorial](https://jams.hackclub.com/batch/webOS)
