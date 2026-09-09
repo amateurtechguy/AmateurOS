@@ -290,7 +290,7 @@ body {
     cursor: pointer;
     pointer-events: auto;
 }
-.calc-icon {
+.calc-icon, .news-icon {
     width: 60px;
     height: 60px;
     margin: 0 auto 5px;
@@ -299,7 +299,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-.calc-icon img {
+.calc-icon img, .news-icon img {
     width: 100%;
     height: 100%;
     border-radius: 5px;
@@ -309,6 +309,10 @@ body {
 #journalapp {
     top: 20px;
     left: 120px;
+}
+#newsapp {
+    top: 120px;
+    left: 10px;
 }
 #journalapp .journal-icon {
     width: 60px;
@@ -384,18 +388,12 @@ body {
     top: auto;
     bottom: 60px;
 }
-.window:has(.calculatorframe) {
-    width: 600px;
-    height: 600px;
-    top: auto;
-    bottom: 60px;
-}
-.windowcontent:has(.calculatorframe), .windowcontent:has(.journalframe), .windowcontent:has(.searchframe) {
+.windowcontent:has(.calculatorframe), .windowcontent:has(.journalframe), .windowcontent:has(.searchframe), .windowcontent:has(.filesframe), .windowcontent:has(.newsframe) {
     padding: 0;
     overflow: hidden;
     height: calc(100% - 45px);
 }
-.windowcontent .calculatorframe, .windowcontent .journalframe, .windowcontent .searchframe {
+.windowcontent .calculatorframe, .windowcontent .journalframe, .windowcontent .searchframe, .windowcontent .filesframe, .windowcontent .newsframe{
     position: absolute;
     left: 0;
     top: 45px;
