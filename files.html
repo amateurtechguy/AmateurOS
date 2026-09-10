@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files</title>
+    <link rel="stylesheet" href="files.css">
+    <link rel="icon" type="img/png" href="Pictures/favicon.png">
+<body>
+    <div class="files-app">
+        <div class="files-toolbar">
+            <div class="navigation-buttons">
+                <button id="backButton" class="toolbar-button" title="Back">
+                    ←
+                </button>
+                <button id="homeButton" class="toolbar-button" title="Home">
+                    ⌂
+                </button>
+            </div>
+            <div class="breadcrumb" id="breadcrumb">
+                <span>Home</span>
+            </div>
+            <div class="toolbar-actions">
+                <button
+                    id="newFolderButton"
+                    class="toolbar-button action-button"
+                    title="New Folder"
+                >
+                    + Folder
+                </button>
+                <button
+                    id="newFileButton"
+                    class="toolbar-button action-button"
+                    title="New File"
+                >
+                    + File
+                </button>
+            </div>
+        </div>
+        <div class="search-bar-container">
+            <span class="search-icon">⌕</span>
+            <input
+                type="text"
+                id="fileSearch"
+                placeholder="Search files and folders..."
+                autocomplete="off"
+            >
+        </div>
+        <main class="file-area">
+            <div id="emptyMessage" class="empty-message">
+                <div class="empty-icon">📁</div>
+                <h2>This folder is empty</h2>
+                <p>
+                    Create a new file or folder to get started.
+                </p>
+            </div>
+            <div id="fileGrid" class="file-grid"></div>
+        </main>
+        <footer class="files-status">
+            <span id="itemCount">
+                0 items
+            </span>
+            <span id="currentPath">
+                Home
+            </span>
+        </footer>
+        <div id="contextMenu" class="context-menu">
+            <button id="contextOpen">
+                Open
+            </button>
+            <button id="contextRename">
+                Rename
+            </button>
+            <button id="contextDelete">
+                Delete
+            </button>
+        </div>
+        <div id="modalOverlay" class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <span id="modalTitle">
+                        New Folder
+                    </span>
+                    <button
+                        id="modalClose"
+                        class="modal-close"
+                    >
+                        ×
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label id="modalLabel">
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        id="modalInput"
+                        placeholder="Enter name..."
+                    >
+                    <p
+                        id="modalError"
+                        class="modal-error"
+                    ></p>
+                </div>
+                <div class="modal-buttons">
+                    <button
+                        id="modalCancel"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        id="modalConfirm"
+                        class="confirm-button"
+                    >
+                        Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="files.js"></script>
+</body>
+</html>
