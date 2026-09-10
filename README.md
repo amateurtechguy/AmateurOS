@@ -44,6 +44,12 @@ This is a news app that only redirects you to the website in the credits it's no
 
 <img width="956" height="539" alt="image" src="https://github.com/user-attachments/assets/1de1c608-edd3-4521-a5d4-5d601c9374b7" />
 
+## >> Files: 
+
+Just so you guys know, it's not directly connected to the website, yes i made it myself but because i made it in a different file, it can't edit or do anything to the normal desktop apps, but it def works like a normal file if you ignore the small problem:)
+
+<img width="941" height="424" alt="image" src="https://github.com/user-attachments/assets/1e7956e0-2669-43b3-b838-92242e15ae6f" />
+
 
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
