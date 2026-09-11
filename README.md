@@ -50,6 +50,12 @@ Just so you guys know, it's not directly connected to the website, yes i made it
 
 <img width="941" height="424" alt="image" src="https://github.com/user-attachments/assets/1e7956e0-2669-43b3-b838-92242e15ae6f" />
 
+## >> Settings: 
+
+A fully functional settings app that works perfectly, maybe not the clock settings but everything else is completely functional with no bugs, atleast i'd hope not:)
+
+<img width="936" height="416" alt="Screenshot 2026-09-11 181527" src="https://github.com/user-attachments/assets/1b420fc8-6b6a-43df-a40d-38dab8eb9050" />
+
 
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
