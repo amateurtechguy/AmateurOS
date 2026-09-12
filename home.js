@@ -1,14 +1,39 @@
-function updateClock(){
+function updateSystemClock(){
     const now=new Date();
-    const hours=now.getHours().toString().padStart(2,"0");
-    const minutes=now.getMinutes().toString().padStart(2,"0");
+    let clock24=false;
+    try{
+        const saved=JSON.parse(
+            localStorage.getItem(
+                "amateurOSSettings"
+            )||"{}"
+        );
+        clock24=saved.clock24===true;
+    }catch{}
+    const time=now.toLocaleTimeString([],{
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:!clock24
+    });
+    const date=now.toLocaleDateString([],{
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+    });
     const clock=document.getElementById("clock");
+    const timeElement=document.querySelector(".time");
+    const dateElement=document.querySelector(".date");
     if(clock){
-        clock.textContent=`${hours}:${minutes}`;
+        clock.textContent=time;
+    }
+    if(timeElement){
+        timeElement.textContent=time;
+    }
+    if(dateElement){
+        dateElement.textContent=date;
     }
 }
-updateClock();
-setInterval(updateClock,1000);
+updateSystemClock();
+setInterval(updateSystemClock,1000);
 let highestZIndex=100;
 function updateDateTime(){
     const now=new Date();
@@ -72,8 +97,14 @@ function makeWindowDraggable(w){
         }
         let x=e.clientX-offsetX;
         let y=e.clientY-offsetY;
-        x=Math.max(0,Math.min(x,window.innerWidth-w.offsetWidth));
-        y=Math.max(0,Math.min(y,window.innerHeight-w.offsetHeight));
+        x=Math.max(
+            0,
+            Math.min(x,window.innerWidth-w.offsetWidth)
+        );
+        y=Math.max(
+            0,
+            Math.min(y,window.innerHeight-w.offsetHeight)
+        );
         w.style.left=x+"px";
         w.style.top=y+"px";
     });
@@ -106,7 +137,8 @@ function makeWindowResizable(w){
             const startHeight=r.height;
             const startLeft=r.left;
             const startTop=r.top;
-            const direction=[...handle.classList].find(x=>x.startsWith("resize-"));
+            const direction=[...handle.classList]
+                .find(x=>x.startsWith("resize-"));
             const resize=e=>{
                 const dx=e.clientX-startX;
                 const dy=e.clientY-startY;
@@ -142,8 +174,14 @@ function makeWindowResizable(w){
                 }
                 left=Math.max(0,left);
                 top=Math.max(0,top);
-                width=Math.min(width,window.innerWidth-left);
-                height=Math.min(height,window.innerHeight-top);
+                width=Math.min(
+                    width,
+                    window.innerWidth-left
+                );
+                height=Math.min(
+                    height,
+                    window.innerHeight-top
+                );
                 w.style.left=left+"px";
                 w.style.top=top+"px";
                 w.style.width=width+"px";
@@ -175,7 +213,8 @@ function addResizeHandles(w){
         "sw"
     ].forEach(direction=>{
         const handle=document.createElement("div");
-        handle.className=`resize-handle resize-${direction}`;
+        handle.className=
+            `resize-handle resize-${direction}`;
         w.appendChild(handle);
     });
 }
@@ -218,7 +257,10 @@ function minimizeWindow(w){
         restoreWindowState(w);
         const maximizeButton=w.querySelector(".maximize");
         if(maximizeButton){
-            maximizeButton.textContent=w.classList.contains("maximized")?"❐":"□";
+            maximizeButton.textContent=
+                w.classList.contains("maximized")
+                    ?"❐"
+                    :"□";
         }
         bringToFront(w);
         return;
@@ -230,14 +272,35 @@ function minimizeWindow(w){
     saveWindowState(w);
     w.classList.add("minimized");
     if(content){
-        content.style.setProperty("display","none","important");
+        content.style.setProperty(
+            "display",
+            "none",
+            "important"
+        );
     }
     if(header){
-        const headerHeight=header.getBoundingClientRect().height;
-        w.style.setProperty("height",headerHeight+"px","important");
-        w.style.setProperty("min-height","0px","important");
-        w.style.setProperty("max-height",headerHeight+"px","important");
-        w.style.setProperty("overflow","hidden","important");
+        const headerHeight=
+            header.getBoundingClientRect().height;
+        w.style.setProperty(
+            "height",
+            headerHeight+"px",
+            "important"
+        );
+        w.style.setProperty(
+            "min-height",
+            "0px",
+            "important"
+        );
+        w.style.setProperty(
+            "max-height",
+            headerHeight+"px",
+            "important"
+        );
+        w.style.setProperty(
+            "overflow",
+            "hidden",
+            "important"
+        );
     }
     bringToFront(w);
 }
@@ -257,9 +320,13 @@ function maximizeWindow(w){
         w.classList.remove("maximized");
         restoreWindowState(w);
     }
-    const maximizeButton=w.querySelector(".maximize");
+    const maximizeButton=
+        w.querySelector(".maximize");
     if(maximizeButton){
-        maximizeButton.textContent=w.classList.contains("maximized")?"❐":"□";
+        maximizeButton.textContent=
+            w.classList.contains("maximized")
+                ?"❐"
+                :"□";
     }
     bringToFront(w);
 }
@@ -270,9 +337,12 @@ function closeWindow(w){
     w.remove();
 }
 function setupWindowButtons(w){
-    const minimizeButton=w.querySelector(".minimize");
-    const maximizeButton=w.querySelector(".maximize");
-    const closeButton=w.querySelector(".close");
+    const minimizeButton=
+        w.querySelector(".minimize");
+    const maximizeButton=
+        w.querySelector(".maximize");
+    const closeButton=
+        w.querySelector(".close");
     if(minimizeButton){
         minimizeButton.addEventListener("click",e=>{
             e.preventDefault();
@@ -324,15 +394,25 @@ function createWindow(title,content){
             ${content}
         </div>
     `;
-    const windowCount=document.querySelectorAll(".window").length;
+    const windowCount=
+        document.querySelectorAll(".window").length;
     const offset=windowCount*30;
     w.style.left=`${150+offset}px`;
     w.style.top=`${160+offset}px`;
-    document.querySelector(".desktopcontent").appendChild(w);
+    const desktopContent=
+        document.querySelector(".desktopcontent");
+    if(!desktopContent){
+        console.error(
+            "AmateurOS: .desktopcontent was not found."
+        );
+        return null;
+    }
+    desktopContent.appendChild(w);
     setupWindow(w);
     return w;
 }
-const initialWindow=document.getElementById("homeWindow");
+const initialWindow=
+    document.getElementById("homeWindow");
 if(initialWindow){
     setupWindow(initialWindow);
 }
@@ -343,6 +423,7 @@ function openCalculator(){
         <iframe
             src="calculator.html"
             class="calculatorframe"
+            title="Calculator"
         ></iframe>
         `
     );
@@ -354,6 +435,7 @@ function openJournal(){
         <iframe
             src="journal.html"
             class="journalframe"
+            title="Journal"
         ></iframe>
         `
     );
@@ -365,11 +447,37 @@ function openNews(){
         <iframe
             src="https://time.com/"
             class="newsframe"
+            title="News"
         ></iframe>
         `
     );
 }
-const appsButton=document.getElementById("appsButton");
+function openWeather(){
+    createWindow(
+        "Weather",
+        `
+        <iframe
+            src="weather.html"
+            class="weatherframe"
+            title="Weather"
+        ></iframe>
+        `
+    );
+}
+function openSnake(){
+    createWindow(
+        "Snake",
+        `
+        <iframe
+            src="snake.html"
+            class="snakeframe"
+            title="Snake"
+        ></iframe>
+        `
+    );
+}
+const appsButton=
+    document.getElementById("appsButton");
 if(appsButton){
     appsButton.addEventListener("click",()=>{
         const appsWindow=createWindow(
@@ -377,31 +485,110 @@ if(appsButton){
             `
             <h1>Apps</h1>
             <div class="app-list">
-                <button class="app-launcher" id="calculatorLauncher">
-                    <img src="Pictures/calculator.png" alt="Calculator">
+                <button
+                    class="app-launcher"
+                    id="calculatorLauncher"
+                >
+                    <img
+                        src="Pictures/calculator.png"
+                        alt="Calculator"
+                        data-app-icon="calculator"
+                    >
                     <span>Calculator</span>
                 </button>
-                <button class="app-launcher" id="journalLauncher">
-                    <img src="Pictures/journal.jpg" alt="Journal">
+                <button
+                    class="app-launcher"
+                    id="journalLauncher"
+                >
+                    <img
+                        src="Pictures/journal.jpg"
+                        alt="Journal"
+                        data-app-icon="journal"
+                    >
                     <span>Journal</span>
                 </button>
-                <button class="app-launcher" id="newsLauncher">
-                    <img src="Pictures/IMG_1699.jpg" alt="News">
+                <button
+                    class="app-launcher"
+                    id="newsLauncher"
+                >
+                    <img
+                        src="Pictures/IMG_1699.jpg"
+                        alt="News"
+                        data-app-icon="news"
+                    >
                     <span>News</span>
+                </button>
+                <button
+                    class="app-launcher"
+                    id="weatherLauncher"
+                >
+                    <img
+                        src="Pictures/weather.jpg"
+                        alt="Weather"
+                        data-app-icon="weather"
+                    >
+                    <span>Weather</span>
+                </button>
+                <button
+                    class="app-launcher"
+                    id="snakeLauncher"
+                >
+                    <!-- Add your Snake icon here later -->
+                    <span>Snake</span>
                 </button>
             </div>
             `
         );
-        appsWindow.querySelector("#calculatorLauncher").addEventListener("click",openCalculator);
-        appsWindow.querySelector("#journalLauncher").addEventListener("click",openJournal);
-        appsWindow.querySelector("#newsLauncher").addEventListener("click",openNews);
+        if(!appsWindow){
+            return;
+        }
+        appsWindow
+            .querySelector("#calculatorLauncher")
+            .addEventListener(
+                "click",
+                openCalculator
+            );
+        appsWindow
+            .querySelector("#journalLauncher")
+            .addEventListener(
+                "click",
+                openJournal
+            );
+        appsWindow
+            .querySelector("#newsLauncher")
+            .addEventListener(
+                "click",
+                openNews
+            );
+        /*
+         * FIX:
+         * Weather was incorrectly calling openNews().
+         */
+        appsWindow
+            .querySelector("#weatherLauncher")
+            .addEventListener(
+                "click",
+                openWeather
+            );
+        /*
+         * NEW:
+         * Snake opens snake.html.
+         */
+        appsWindow
+            .querySelector("#snakeLauncher")
+            .addEventListener(
+                "click",
+                openSnake
+            );
+        updateAppIcons();
     });
 }
-const filesButton=document.getElementById("filesButton");
+const filesButton=
+    document.getElementById("filesButton");
 if(filesButton){
     filesButton.addEventListener("click",()=>{
         createWindow(
-            "Files",
+            "File Manager",
             `
             <iframe
                 src="files.html"
@@ -420,18 +607,35 @@ const defaultSettings={
     volume:80,
     muted:false,
     notifications:true,
-    clock24:true
+    clock24:false
 };
 function getSettings(){
     try{
         return{
             ...defaultSettings,
-            ...JSON.parse(localStorage.getItem("amateurOSSettings")||"{}")
+            ...JSON.parse(
+                localStorage.getItem(
+                    "amateurOSSettings"
+                )||"{}"
+            )
         };
     }catch{
         return{
             ...defaultSettings
         };
+    }
+}
+function updateClockFormat(){
+    const settings=getSettings();
+    const now=new Date();
+    const time=now.toLocaleTimeString([],{
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:!settings.clock24
+    });
+    const clock=document.getElementById("clock");
+    if(clock){
+        clock.textContent=time;
     }
 }
 function saveSettings(settings){
@@ -440,26 +644,152 @@ function saveSettings(settings){
         JSON.stringify(settings)
     );
 }
-function applySettings(){
-    const settings=getSettings();
-    document.documentElement.style.setProperty("--os-accent",settings.accent);
-    document.documentElement.style.setProperty("--os-accent-rgb",hexToRGB(settings.accent));
-    document.documentElement.style.setProperty("--os-scale",`${settings.scale}%`);
-    document.body.classList.toggle("light-theme",settings.theme==="light");
-    document.body.style.setProperty("--os-bg",settings.theme==="light"?"#eeeeee":"#050505");
-    document.body.style.setProperty("--os-panel",settings.theme==="light"?"#ffffff":"#0c0c0c");
-    document.body.style.setProperty("--os-panel2",settings.theme==="light"?"#e5e5e5":"#141414");
-    document.body.style.setProperty("--os-text",settings.theme==="light"?"#111111":"#eeeeee");
-    document.body.style.setProperty("--os-muted",settings.theme==="light"?"#555555":"#aaaaaa");
-    const desktop=document.querySelector(".desktop");
-    if(desktop){desktop.style.backgroundImage=`url("${settings.wallpaper}")`;}
-}
 function hexToRGB(hex){
     const value=hex.replace("#","");
-    const r=parseInt(value.substring(0,2),16);
-    const g=parseInt(value.substring(2,4),16);
-    const b=parseInt(value.substring(4,6),16);
+    const r=parseInt(
+        value.substring(0,2),
+        16
+    );
+    const g=parseInt(
+        value.substring(2,4),
+        16
+    );
+    const b=parseInt(
+        value.substring(4,6),
+        16
+    );
     return `${r},${g},${b}`;
+}
+function updateAppIcons(){
+    const isLight=
+        document.body.classList.contains("light-theme");
+    const icons={
+        calculator:{
+            dark:"Pictures/calculator.png",
+            light:"Pictures/lightcalculator.png"
+        },
+        journal:{
+            dark:"Pictures/journal.jpg",
+            light:"Pictures/lightjournal.png"
+        },
+        news:{
+            dark:"Pictures/IMG_1699.jpg",
+            light:"Pictures/lightnews.png"
+        },
+        weather:{
+            dark:"Pictures/weather.jpg",
+            light:"Pictures/lightweather.png"
+        }
+    };
+    document
+        .querySelectorAll(".app-icon,.desktop-app")
+        .forEach(app=>{
+            const id=
+                (app.id||"").toLowerCase();
+            const appName=
+                (app.dataset.app||"").toLowerCase();
+            let type=null;
+            if(
+                id==="calculatorapp"||
+                appName==="calculator"
+            ){
+                type="calculator";
+            }else if(
+                id==="journalapp"||
+                appName==="journal"
+            ){
+                type="journal";
+            }else if(
+                id==="newsapp"||
+                appName==="news"
+            ){
+                type="news";
+            }else if(
+                id==="weatherapp"||
+                appName==="weather"
+            ){
+                type="weather";
+            }
+            if(!type){
+                return;
+            }
+            const img=
+                app.querySelector("img");
+            if(img){
+                img.src=
+                    isLight
+                        ?icons[type].light
+                        :icons[type].dark;
+            }
+        });
+    document
+        .querySelectorAll("[data-app-icon]")
+        .forEach(img=>{
+            const type=
+                img.dataset.appIcon;
+            if(!icons[type]){
+                return;
+            }
+            img.src=
+                isLight
+                    ?icons[type].light
+                    :icons[type].dark;
+        });
+}
+function applySettings(){
+    const settings=getSettings();
+    document.documentElement.style.setProperty(
+        "--os-accent",
+        settings.accent
+    );
+    document.documentElement.style.setProperty(
+        "--os-accent-rgb",
+        hexToRGB(settings.accent)
+    );
+    document.body.style.zoom=
+        `${settings.scale}%`;
+    document.body.classList.toggle(
+        "light-theme",
+        settings.theme==="light"
+    );
+    document.body.style.setProperty(
+        "--os-bg",
+        settings.theme==="light"
+            ?" #eeeeee".trim()
+            :"#050505"
+    );
+    document.body.style.setProperty(
+        "--os-panel",
+        settings.theme==="light"
+            ?" #ffffff".trim()
+            :"#0c0c0c"
+    );
+    document.body.style.setProperty(
+        "--os-panel2",
+        settings.theme==="light"
+            ?" #e5e5e5".trim()
+            :"#141414"
+    );
+    document.body.style.setProperty(
+        "--os-text",
+        settings.theme==="light"
+            ?" #111111".trim()
+            :"#eeeeee"
+    );
+    document.body.style.setProperty(
+        "--os-muted",
+        settings.theme==="light"
+            ?" #555555".trim()
+            :"#aaaaaa"
+    );
+    const desktop=
+        document.querySelector(".desktop");
+    if(desktop){
+        desktop.style.backgroundImage=
+            `url("${settings.wallpaper}")`;
+    }
+    updateAppIcons();
+    updateClockFormat();
 }
 function createSettingsWindow(){
     const settings=getSettings();
@@ -469,68 +799,176 @@ function createSettingsWindow(){
         <div class="settings-app">
             <aside class="settings-sidebar">
                 <div class="settings-brand">
-                    <div class="settings-brand-icon">A</div>
+                    <div class="settings-brand-icon">
+                        A
+                    </div>
                     <div>
                         <strong>AmateurOS</strong>
                         <small>System Settings</small>
                     </div>
                 </div>
-                <button class="settings-nav active" data-section="appearance">🎨 Appearance</button>
-                <button class="settings-nav" data-section="display">🖥 Display</button>
-                <button class="settings-nav" data-section="sound">🔊 Sound</button>
-                <button class="settings-nav" data-section="notifications">🔔 Notifications</button>
-                <button class="settings-nav" data-section="privacy">🔒 Privacy</button>
-                <button class="settings-nav" data-section="datetime">🕐 Date & Time</button>
-                <button class="settings-nav" data-section="system">💻 System</button>
+                <button
+                    class="settings-nav active"
+                    data-section="appearance"
+                >
+                    🎨 Appearance
+                </button>
+                <button
+                    class="settings-nav"
+                    data-section="display"
+                >
+                    🖥 Display
+                </button>
+                <button
+                    class="settings-nav"
+                    data-section="sound"
+                >
+                    🔊 Sound
+                </button>
+                <button
+                    class="settings-nav"
+                    data-section="notifications"
+                >
+                    🔔 Notifications
+                </button>
+                <button
+                    class="settings-nav"
+                    data-section="privacy"
+                >
+                    🔒 Privacy
+                </button>
+                <button
+                    class="settings-nav"
+                    data-section="datetime"
+                >
+                    🕐 Date & Time
+                </button>
+                <button
+                    class="settings-nav"
+                    data-section="system"
+                >
+                    💻 System
+                </button>
             </aside>
             <main class="settings-main">
-                <section class="settings-section active" data-panel="appearance">
+                <section
+                    class="settings-section active"
+                    data-panel="appearance"
+                >
                     <h1>Appearance</h1>
-                    <p class="settings-description">Customize the look and feel of AmateurOS.</p>
+                    <p class="settings-description">
+                        Customize the look and feel of AmateurOS.
+                    </p>
                     <div class="settings-card">
                         <h3>Theme</h3>
                         <div class="settings-options">
-                            <button class="theme-option ${settings.theme==="dark"?"selected":""}" data-theme="dark">🌑 Dark</button>
-                            <button class="theme-option ${settings.theme==="light"?"selected":""}" data-theme="light">☀️ Light</button>
+                            <button
+                                class="theme-option ${settings.theme==="dark"?"selected":""}"
+                                data-theme="dark"
+                            >
+                                🌑 Dark
+                            </button>
+                            <button
+                                class="theme-option ${settings.theme==="light"?"selected":""}"
+                                data-theme="light"
+                            >
+                                ☀️ Light
+                            </button>
                         </div>
                     </div>
                     <div class="settings-card">
                         <h3>Accent Color</h3>
                         <div class="accent-options">
-                            <button class="accent-option red" data-color="#ff2222"></button>
-                            <button class="accent-option orange" data-color="#ff6600"></button>
-                            <button class="accent-option blue" data-color="#2299ff"></button>
-                            <button class="accent-option purple" data-color="#a855f7"></button>
-                            <button class="accent-option green" data-color="#22dd88"></button>
+                            <button
+                                class="accent-option red"
+                                data-color="#ff2222"
+                            ></button>
+                            <button
+                                class="accent-option orange"
+                                data-color="#ff6600"
+                            ></button>
+                            <button
+                                class="accent-option blue"
+                                data-color="#2299ff"
+                            ></button>
+                            <button
+                                class="accent-option purple"
+                                data-color="#a855f7"
+                            ></button>
+                            <button
+                                class="accent-option green"
+                                data-color="#22dd88"
+                            ></button>
                         </div>
                     </div>
                     <div class="settings-card">
                         <h3>Wallpaper</h3>
                         <div class="wallpaper-options">
-                            <button data-wallpaper="Pictures/background1.jpg">Default</button>
-                            <button data-wallpaper="Pictures/background2.jpg">Wallpaper 2</button>
-                            <button data-wallpaper="Pictures/background3.jpeg">Wallpaper 3</button>
-                            <button data-wallpaper="Pictures/background4.png">Wallpaper 4</button>
+                            <button
+                                data-wallpaper="Pictures/background1.jpg"
+                            >
+                                Default
+                            </button>
+                            <button
+                                data-wallpaper="Pictures/background2.jpg"
+                            >
+                                Wallpaper 2
+                            </button>
+                            <button
+                                data-wallpaper="Pictures/background3.jpeg"
+                            >
+                                Wallpaper 3
+                            </button>
+                            <button
+                                data-wallpaper="Pictures/background4.png"
+                            >
+                                Wallpaper 4
+                            </button>
+                            <button
+                                data-wallpaper="Pictures/background5.jpg"
+                            >
+                                Wallpaper 5
+                            </button>
                         </div>
                     </div>
                 </section>
-                <section class="settings-section" data-panel="display">
+                <section
+                    class="settings-section"
+                    data-panel="display"
+                >
                     <h1>Display</h1>
-                    <p class="settings-description">Adjust how AmateurOS appears on your screen.</p>
+                    <p class="settings-description">
+                        Adjust how AmateurOS appears on your screen.
+                    </p>
                     <div class="settings-card">
                         <h3>Interface Scale</h3>
                         <select id="osScale">
-                            ${[80,90,100,110,125,150].map(x=>`
-                                <option value="${x}" ${settings.scale==x?"selected":""}>
+                            ${[
+                                80,
+                                90,
+                                100,
+                                110,
+                                125,
+                                150
+                            ].map(x=>`
+                                <option
+                                    value="${x}"
+                                    ${settings.scale==x?"selected":""}
+                                >
                                     ${x}%
                                 </option>
                             `).join("")}
                         </select>
                     </div>
                 </section>
-                <section class="settings-section" data-panel="sound">
+                <section
+                    class="settings-section"
+                    data-panel="sound"
+                >
                     <h1>Sound</h1>
-                    <p class="settings-description">Control AmateurOS audio settings.</p>
+                    <p class="settings-description">
+                        Control AmateurOS audio settings.
+                    </p>
                     <div class="settings-card">
                         <div class="setting-row">
                             <span>🔊 Volume</span>
@@ -541,7 +979,9 @@ function createSettingsWindow(){
                                 max="100"
                                 value="${settings.volume}"
                             >
-                            <span id="volumeValue">${settings.volume}%</span>
+                            <span id="volumeValue">
+                                ${settings.volume}%
+                            </span>
                         </div>
                         <label class="setting-toggle">
                             <input
@@ -549,13 +989,20 @@ function createSettingsWindow(){
                                 type="checkbox"
                                 ${settings.muted?"checked":""}
                             >
-                            <span>Mute system sounds</span>
+                            <span>
+                                Mute system sounds
+                            </span>
                         </label>
                     </div>
                 </section>
-                <section class="settings-section" data-panel="notifications">
+                <section
+                    class="settings-section"
+                    data-panel="notifications"
+                >
                     <h1>Notifications</h1>
-                    <p class="settings-description">Control notifications from AmateurOS applications.</p>
+                    <p class="settings-description">
+                        Control notifications from AmateurOS applications.
+                    </p>
                     <div class="settings-card">
                         <label class="setting-toggle">
                             <input
@@ -563,24 +1010,41 @@ function createSettingsWindow(){
                                 type="checkbox"
                                 ${settings.notifications?"checked":""}
                             >
-                            <span>Enable notifications</span>
+                            <span>
+                                Enable notifications
+                            </span>
                         </label>
                     </div>
                 </section>
-                <section class="settings-section" data-panel="privacy">
+                <section
+                    class="settings-section"
+                    data-panel="privacy"
+                >
                     <h1>Privacy & Security</h1>
-                    <p class="settings-description">Manage local AmateurOS privacy settings.</p>
+                    <p class="settings-description">
+                        Manage local AmateurOS privacy settings.
+                    </p>
                     <div class="settings-card">
                         <h3>Local Storage</h3>
-                        <p>AmateurOS stores your preferences locally in your browser.</p>
-                        <button class="danger-button" id="clearOSData">
+                        <p>
+                            AmateurOS stores your preferences locally in your browser.
+                        </p>
+                        <button
+                            class="danger-button"
+                            id="clearOSData"
+                        >
                             Clear AmateurOS Data
                         </button>
                     </div>
                 </section>
-                <section class="settings-section" data-panel="datetime">
+                <section
+                    class="settings-section"
+                    data-panel="datetime"
+                >
                     <h1>Date & Time</h1>
-                    <p class="settings-description">Configure how the system clock is displayed.</p>
+                    <p class="settings-description">
+                        Configure how the system clock is displayed.
+                    </p>
                     <div class="settings-card">
                         <label class="setting-toggle">
                             <input
@@ -588,13 +1052,20 @@ function createSettingsWindow(){
                                 type="checkbox"
                                 ${settings.clock24?"checked":""}
                             >
-                            <span>Use 24-hour clock</span>
+                            <span>
+                                Use 24-hour clock
+                            </span>
                         </label>
                     </div>
                 </section>
-                <section class="settings-section" data-panel="system">
+                <section
+                    class="settings-section"
+                    data-panel="system"
+                >
                     <h1>System</h1>
-                    <p class="settings-description">Information about this AmateurOS installation.</p>
+                    <p class="settings-description">
+                        Information about this AmateurOS installation.
+                    </p>
                     <div class="settings-card system-info">
                         <div>
                             <span>Operating System</span>
@@ -613,7 +1084,10 @@ function createSettingsWindow(){
                             <strong>LocalStorage</strong>
                         </div>
                     </div>
-                    <button class="reset-button" id="resetOSSettings">
+                    <button
+                        class="reset-button"
+                        id="resetOSSettings"
+                    >
                         Reset All Settings
                     </button>
                 </section>
@@ -621,10 +1095,17 @@ function createSettingsWindow(){
         </div>
         `
     );
-    w.style.width=Math.min(850,innerWidth-40)+"px";
-    w.style.height=Math.min(600,innerHeight-80)+"px";
-    const q=selector=>w.querySelector(selector);
-    const qa=selector=>w.querySelectorAll(selector);
+    if(!w){
+        return null;
+    }
+    w.style.width=
+        Math.min(850,innerWidth-40)+"px";
+    w.style.height=
+        Math.min(600,innerHeight-80)+"px";
+    const q=selector=>
+        w.querySelector(selector);
+    const qa=selector=>
+        w.querySelectorAll(selector);
     qa(".settings-nav").forEach(button=>{
         button.addEventListener("click",()=>{
             qa(".settings-nav").forEach(x=>{
@@ -634,14 +1115,18 @@ function createSettingsWindow(){
                 x.classList.remove("active");
             });
             button.classList.add("active");
-            q(
+            const panel=q(
                 `[data-panel="${button.dataset.section}"]`
-            ).classList.add("active");
+            );
+            if(panel){
+                panel.classList.add("active");
+            }
         });
     });
     qa(".theme-option").forEach(button=>{
         button.addEventListener("click",()=>{
-            settings.theme=button.dataset.theme;
+            settings.theme=
+                button.dataset.theme;
             saveSettings(settings);
             applySettings();
             qa(".theme-option").forEach(x=>{
@@ -654,64 +1139,117 @@ function createSettingsWindow(){
     });
     qa(".accent-option").forEach(button=>{
         button.addEventListener("click",()=>{
-            settings.accent=button.dataset.color;
+            settings.accent=
+                button.dataset.color;
             saveSettings(settings);
             applySettings();
         });
     });
     qa("[data-wallpaper]").forEach(button=>{
         button.addEventListener("click",()=>{
-            settings.wallpaper=button.dataset.wallpaper;
+            settings.wallpaper=
+                button.dataset.wallpaper;
             saveSettings(settings);
             applySettings();
         });
     });
-    q("#osScale").addEventListener("change",e=>{
-        settings.scale=e.target.value;
-        saveSettings(settings);
-        applySettings();
-    });
-    q("#volumeSlider").addEventListener("input",e=>{
-        settings.volume=Number(e.target.value);
-        q("#volumeValue").textContent=settings.volume+"%";
-        saveSettings(settings);
-    });
-    q("#muteToggle").addEventListener("change",e=>{
-        settings.muted=e.target.checked;
-        saveSettings(settings);
-    });
-    q("#notificationToggle").addEventListener("change",e=>{
-        settings.notifications=e.target.checked;
-        saveSettings(settings);
-    });
-    q("#clock24Toggle").addEventListener("change",e=>{
-        settings.clock24=e.target.checked;
-        saveSettings(settings);
-    });
-    q("#clearOSData").addEventListener("click",()=>{
-        if(confirm("Clear all AmateurOS saved data?")){
-            localStorage.removeItem("amateurOSSettings");
+    const scale=q("#osScale");
+    if(scale){
+        scale.addEventListener("change",e=>{
+            settings.scale=e.target.value;
+            saveSettings(settings);
             applySettings();
-            alert("AmateurOS settings have been cleared.");
-        }
-    });
-    q("#resetOSSettings").addEventListener("click",()=>{
-        if(confirm("Reset all AmateurOS settings?")){
-            localStorage.removeItem("amateurOSSettings");
-            applySettings();
-            w.remove();
-        }
-    });
+        });
+    }
+    const volumeSlider=
+        q("#volumeSlider");
+    if(volumeSlider){
+        volumeSlider.addEventListener("input",e=>{
+            settings.volume=
+                Number(e.target.value);
+            const volumeValue=
+                q("#volumeValue");
+            if(volumeValue){
+                volumeValue.textContent=
+                    settings.volume+"%";
+            }
+            saveSettings(settings);
+        });
+    }
+    const muteToggle=
+        q("#muteToggle");
+    if(muteToggle){
+        muteToggle.addEventListener("change",e=>{
+            settings.muted=
+                e.target.checked;
+            saveSettings(settings);
+        });
+    }
+    const notificationToggle=
+        q("#notificationToggle");
+    if(notificationToggle){
+        notificationToggle.addEventListener("change",e=>{
+            settings.notifications=
+            saveSettings(settings);
+        });
+    }
+    const clock24Toggle=
+        q("#clock24Toggle");
+    if(clock24Toggle){
+        clock24Toggle.addEventListener("change",e=>{
+            settings.clock24=
+                e.target.checked;
+
+            saveSettings(settings);
+            updateSystemClock();
+        });
+    }
+    const clearOSData=
+        q("#clearOSData");
+    if(clearOSData){
+        clearOSData.addEventListener("click",()=>{
+            if(confirm(
+                "Clear all AmateurOS saved data?"
+            )){
+                localStorage.removeItem(
+                    "amateurOSSettings"
+                );
+                applySettings();
+                alert(
+                    "AmateurOS settings have been cleared."
+                );
+            }
+        });
+    }
+    const resetOSSettings=
+        q("#resetOSSettings");
+    if(resetOSSettings){
+        resetOSSettings.addEventListener("click",()=>{
+            if(confirm(
+                "Reset all AmateurOS settings?"
+            )){
+                localStorage.removeItem(
+                    "amateurOSSettings"
+                );
+
+                applySettings();
+
+                w.remove();
+            }
+        });
+    }
     return w;
 }
 applySettings();
-const settingsButton=document.getElementById("settingsButton");
+const settingsButton=
+    document.getElementById("settingsButton");
 if(settingsButton){
     settingsButton.addEventListener("click",()=>{
         createSettingsWindow();
     });
 }
-const calculatorApp=document.getElementById("calculatorApp");
+const calculatorApp=
+    document.getElementById("calculatorApp");
 if(calculatorApp){
     calculatorApp.addEventListener("dblclick",()=>{
         openCalculator();
@@ -721,14 +1259,16 @@ document.addEventListener("keydown",event=>{
     if(event.key!=="Escape"){
         return;
     }
-    const windows=document.querySelectorAll(".window");
+    const windows=
+        document.querySelectorAll(".window");
     if(!windows.length){
         return;
     }
     let activeWindow=null;
     let highest=-1;
     windows.forEach(w=>{
-        const z=parseInt(w.style.zIndex)||0;
+        const z=
+            parseInt(w.style.zIndex)||0;
         if(z>highest){
             highest=z;
             activeWindow=w;
@@ -738,45 +1278,64 @@ document.addEventListener("keydown",event=>{
         closeWindow(activeWindow);
     }
 });
-document.querySelectorAll(".app-icon,.desktop-app").forEach(app=>{
-    app.style.pointerEvents="auto";
-    app.addEventListener("dblclick",e=>{
-        e.preventDefault();
-        e.stopPropagation();
-        const id=(app.id||"").toLowerCase();
-        const appName=(app.dataset.app||"").toLowerCase();
-        if(
-            id==="calculatorapp"||
-            appName==="calculator"
-        ){
-            openCalculator();
-        }else if(
-            id==="journalapp"||
-            appName==="journal"
-        ){
-            openJournal();
-        }else if(
-            id==="newsapp"||
-            appName==="news"
-        ){
-            openNews();
-        }
+document
+    .querySelectorAll(".app-icon,.desktop-app")
+    .forEach(app=>{
+        app.style.pointerEvents="auto";
+        app.addEventListener("dblclick",e=>{
+            e.preventDefault();
+            e.stopPropagation();
+            const id=
+                (app.id||"").toLowerCase();
+            const appName=
+                (app.dataset.app||"").toLowerCase();
+            if(
+                id==="calculatorapp"||
+                appName==="calculator"
+            ){
+                openCalculator();
+            }else if(
+                id==="journalapp"||
+                appName==="journal"
+            ){
+                openJournal();
+            }else if(
+                id==="newsapp"||
+                appName==="news"
+            ){
+                openNews();
+            }else if(
+                id==="weatherapp"||
+                appName==="weather"
+            ){
+                openWeather();
+            }else if(
+                id==="snakeapp"||
+                appName==="snake"
+            ){
+                openSnake();
+            }
+        });
     });
-});
-const desktopSearch=document.getElementById("desktopSearch");
+const desktopSearch=
+    document.getElementById("desktopSearch");
 if(desktopSearch){
-    desktopSearch.addEventListener("keydown",event=>{
-        if(event.key!=="Enter"){
-            return;
+    desktopSearch.addEventListener(
+        "keydown",
+        event=>{
+            if(event.key!=="Enter"){
+                return;
+            }
+            const query=
+                desktopSearch.value.trim();
+            if(!query){
+                return;
+            }
+            openSearchWindow(query);
+            desktopSearch.value="";
+            desktopSearch.blur();
         }
-        const query=desktopSearch.value.trim();
-        if(!query){
-            return;
-        }
-        openSearchWindow(query);
-        desktopSearch.value="";
-        desktopSearch.blur();
-    });
+    );
 }
 function openSearchWindow(query){
     const googleURL=
@@ -794,7 +1353,8 @@ function openSearchWindow(query){
     );
 }
 function escapeHTML(text){
-    const div=document.createElement("div");
+    const div=
+        document.createElement("div");
     div.textContent=text;
     return div.innerHTML;
 }
