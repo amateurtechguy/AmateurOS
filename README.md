@@ -67,6 +67,7 @@ A fully functional settings app that works perfectly, maybe not the clock settin
 - [Resizeable windows](https://youtu.be/NpBZtR1nLwA?si=oKSESAqemRRQhz_I)
 - [Journal](https://www.youtube.com/watch?v=gzoifHuIsrI)
 - [News](https://time.com/)
+- [Weather](https://youtu.be/MIYQR-Ybrn4?si=PaOdxg6KeqnYmij3)
 
 ## Apps used:
 
