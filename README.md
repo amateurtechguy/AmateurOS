@@ -56,6 +56,17 @@ A fully functional settings app that works perfectly, maybe not the clock settin
 
 <img width="936" height="416" alt="Screenshot 2026-09-11 181527" src="https://github.com/user-attachments/assets/1b420fc8-6b6a-43df-a40d-38dab8eb9050" />
 
+## >> Weather app:
+
+This is an app that lets you put in any city and find the weather status on it and it's forecast, it is amazing for people who don't trust websites with their location! 
+
+<img width="950" height="427" alt="Screenshot 2026-09-13 111906" src="https://github.com/user-attachments/assets/18da3763-5b37-4d94-9105-f4870c470cbb" />
+
+## >> Snake game:
+
+The classic snake game that everybody loves, this is genuinely one of the funnest things i ever had to make it is so addicting to play:D
+
+<img width="959" height="539" alt="Screenshot 2026-09-12 211535" src="https://github.com/user-attachments/assets/7b2c018f-d517-49ab-b122-9e9ec9e939a1" />
 
 ## Credits:
 - [Mathilde (the creator of neverlandOS)](https://github.com/253-Mathilde/My-first-OS)
@@ -68,6 +79,7 @@ A fully functional settings app that works perfectly, maybe not the clock settin
 - [Journal](https://www.youtube.com/watch?v=gzoifHuIsrI)
 - [News](https://time.com/)
 - [Weather](https://youtu.be/MIYQR-Ybrn4?si=PaOdxg6KeqnYmij3)
+- [Snake game](https://youtu.be/Je0B3nHhKmM?si=6F-14SXT-mJGS07L)
 
 ## Apps used:
 
