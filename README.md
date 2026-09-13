@@ -88,6 +88,7 @@ The classic snake game that everybody loves, this is genuinely one of the funnes
 - Youtube for tutorials.
 - Lapse/Hackatime to log my hours.
 - Slack to ask necessary questions.
+- Google AI to shorten code and debug
   
 ## Programming languages used:
 
