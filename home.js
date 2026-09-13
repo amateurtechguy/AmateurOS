@@ -294,6 +294,7 @@ if(appsButton){
                     <span>Weather</span>
                 </button>
                 <button class="app-launcher" id="snakeLauncher">
+                <img src="Pictures/snake.png" alt="snake" data-app-icon="snake">
                     <span>Snake</span>
                 </button>
             </div>
@@ -340,6 +341,10 @@ const icons={
     weather:{
         dark:"Pictures/weather.jpg",
         light:"Pictures/lightweather.png"
+    },
+    snake:{
+        dark:"Pictures/snake.png",
+        light:"Pictures/lightsnake.png"
     }
 };
 function updateAppIcons(){
