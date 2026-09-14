@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Share Tech Mono', monospace;
+}
+body{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+.game-container{
+  text-align: center;
+  padding: 25px;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+h1{
+  margin-bottom: 15px;
+  font-size: 42px;
+  color: #dc0000;
+}
+.score-board{
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.score-board strong{
+  color: #ff1100;
+}
+canvas{
+  display: block;
+  width: 400px;
+  height: 400px;
+  max-width: 100%;
+  background: #020617;
+  border: 3px solid #334155;
+  border-radius: 10px;
+}
+button{
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #a80101;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover{
+  background: #fb0606;
+  transform: translateY(-2px);
+}
+.controls{
+  margin-top: 15px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+kbd{
+  padding: 3px 7px;
+  background: #334155;
+  border-radius: 4px;
+  color: white;
+}
